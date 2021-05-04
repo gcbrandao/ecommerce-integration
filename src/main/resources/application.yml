@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: ecommerce-integration
+    version: '@project.version@'
+    description: '@project.description@'
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+
+base-uri:
+  apiKey: 90e83fd3f0654b31814b0e04aa6bacb606feb932055ca05b92a51f96261c0c3d843f6717
+  lojaIntegradaBlingId: 203502692
+  mercadoLivreBligId: 203536381
+  b2wBligId: 203539574
+  urlBlingProdutos: https://bling.com.br/Api/v2/produtos/json/
