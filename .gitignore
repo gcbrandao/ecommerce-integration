@@ -33,7 +33,7 @@ build/
 
 ####  Geral ###
 LAB-API.postman_collection.json
-
+*.DS_Store
 
 # Local .terraform directories
 **/.terraform/*
