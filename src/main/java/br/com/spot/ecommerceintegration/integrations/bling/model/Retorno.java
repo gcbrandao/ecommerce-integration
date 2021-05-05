@@ -18,5 +18,5 @@ public class Retorno {
 
 
     @JsonProperty("produtos")
-    private List<Produto> produtos;
+    private List<ProdutoElement> produtos;
 }

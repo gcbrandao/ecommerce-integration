@@ -3,6 +3,7 @@ package br.com.spot.ecommerceintegration.component;
 import br.com.spot.ecommerceintegration.component.model.RequestModel;
 import br.com.spot.ecommerceintegration.exceptionhandler.exceptions.ConverterResponseException;
 import br.com.spot.ecommerceintegration.util.ParserUtil;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -80,7 +81,7 @@ public class RequestComponentImpl implements RequestComponent {
 
     private <T> T converterResponseData(RequestModel requestModel, ResponseEntity<String> response) {
         JavaType javaType = objectMapper.getTypeFactory().constructType(requestModel.getReturnClass());
-        objectMapper.disable(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT.FAIL_ON_UNKNOWN_PROPERTIES);
+        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
 
         return readValue(response, javaType);
     }

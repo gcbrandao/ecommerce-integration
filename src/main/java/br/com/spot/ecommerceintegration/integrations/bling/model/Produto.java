@@ -98,7 +98,7 @@ public class Produto {
     private String idFabricante;
 
     @JsonProperty("categoria")
-    private Produto categoria;
+    private Categoria categoria;
 
     @JsonProperty("pesoLiq")
     private String pesoLiq;
@@ -161,7 +161,7 @@ public class Produto {
     private long estoqueAtual;
 
     @JsonProperty("depositos")
-    private List<Deposito> depositos;
+    private List<DepositoElement> depositos;
 
     @JsonProperty("produtoLoja")
     private ProdutoLoja produtoLoja;

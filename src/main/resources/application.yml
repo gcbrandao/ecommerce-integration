@@ -10,6 +10,22 @@ spring:
     serialization:
       WRITE_DATES_AS_TIMESTAMPS: false
 
+#consiguracao database
+  datasource:
+    password: password
+    url: jdbc:mysql://localhost:3306/bestfood?createDatabaseIfNotExist=true&SSL=false&serverTimezone=UTC
+    username: root
+  jpa:
+    database: MYSQL
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL57Dialect
+
+
+# Application
 base-uri:
   apiKey: 90e83fd3f0654b31814b0e04aa6bacb606feb932055ca05b92a51f96261c0c3d843f6717
   lojaIntegradaBlingId: 203502692
