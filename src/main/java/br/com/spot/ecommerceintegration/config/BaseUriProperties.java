@@ -22,4 +22,7 @@ public class BaseUriProperties {
     String b2wBligId;
 
     String urlBlingProdutos;
+
+    String urlBlingProdutosDefault;
+
 }

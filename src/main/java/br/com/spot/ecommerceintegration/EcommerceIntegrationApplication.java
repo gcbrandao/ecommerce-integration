@@ -1,24 +1,37 @@
 package br.com.spot.ecommerceintegration;
 
+import br.com.spot.ecommerceintegration.config.BaseUriProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
-import javax.net.ssl.SSLContext;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
-import java.security.cert.X509Certificate;
 
 @SpringBootApplication
 public class EcommerceIntegrationApplication {
+
 	@Autowired
 	private Environment env;
+
+	@Autowired
+	BaseUriProperties baseUriProperties;
+
+	@Bean
+	public WebClient webClientProdutosBling(WebClient.Builder builder) {
+		return builder
+				.baseUrl(baseUriProperties.getUrlBlingProdutosDefault())
+				.defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+				.build();
+	}
+
 
 
 	public static void main(String[] args) {

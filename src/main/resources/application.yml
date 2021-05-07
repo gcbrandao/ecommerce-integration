@@ -9,6 +9,8 @@ spring:
   jackson:
     serialization:
       WRITE_DATES_AS_TIMESTAMPS: false
+  codec:
+    max-in-memory-size: 10MB
 
 #consiguracao database
   datasource:
@@ -31,4 +33,5 @@ base-uri:
   lojaIntegradaBlingId: 203502692
   mercadoLivreBligId: 203536381
   b2wBligId: 203539574
-  urlBlingProdutos: https://bling.com.br/Api/v2/produtos/json/
+  urlBlingProdutos: https://bling.com.br/Api/v2/produtos/page=%s/json/
+  urlBlingProdutosDefault: https://bling.com.br/Api/v2/produtos
