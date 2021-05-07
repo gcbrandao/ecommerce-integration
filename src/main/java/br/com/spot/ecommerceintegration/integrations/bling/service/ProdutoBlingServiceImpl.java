@@ -45,6 +45,7 @@ public class ProdutoBlingServiceImpl implements ProdutoBlingService {
             Map<String, String> queryParamsMap = new HashMap<>();
             queryParamsMap.put("apikey", apiKey);
             queryParamsMap.put("estoque", "S");
+            queryParamsMap.put("imagem", "S");
             queryParamsMap.put("loja", baseUriProperties.getMercadoLivreBligId());
 
             RequestModel requestModel = RequestModel.builder()
@@ -87,28 +88,63 @@ public class ProdutoBlingServiceImpl implements ProdutoBlingService {
     }
 
     @Override
-    public ProdutosBlingResponse getTodosProdutosBlingMono() {
+    public List<ProdutosBlingResponse> getTodosProdutosBlingMono() {
 
-        String pagina = "1";
+        //String pagina = "1";
+        log.info("Inicio do Busca Produtos MONO");
 
-        Mono<ProdutosBlingResponse> retornoMono = this.webClient.method(HttpMethod.GET)
-                //.uri("/page={pagina}/json/", "1")
-                .uri(uriBuilder -> uriBuilder
-                        .path("/page={pagina}/json/")
-                        .queryParam("apikey", baseUriProperties.getApiKey())
-                        .queryParam("estoque", "S")
-                        .queryParam("loja", baseUriProperties.getMercadoLivreBligId())
-                        .build(pagina))
-                .retrieve()
-                .bodyToMono(ProdutosBlingResponse.class);
+        List<ProdutosBlingResponse> produtoRetorno = new ArrayList<>();
 
+        for (int i=0;i<18;i++) {
 
+            log.info("Chamada -- " + i);
 
-        ProdutosBlingResponse produtoRetorno = retornoMono.block();
-        //log.info(webClient.get().uri().toString());
+            int pagina = i;
+            Mono<ProdutosBlingResponse> retornoMono = this.webClient.method(HttpMethod.GET)
+                    //.uri("/page={pagina}/json/", "1")
+                    .uri(uriBuilder -> uriBuilder
+                            .path("/page={pagina}/json/")
+                            .queryParam("apikey", baseUriProperties.getApiKey())
+                            .queryParam("estoque", "S")
+                            .queryParam("loja", baseUriProperties.getMercadoLivreBligId())
+                            .build(String.valueOf(pagina)))
+                    .retrieve()
+                    .bodyToMono(ProdutosBlingResponse.class);
+
+            produtoRetorno.add(retornoMono.block());
+        }
+
+        log.info("Final do Busca Produtos MONO" + produtoRetorno.size());
+        log.info("Final do Busca Produtos MONO");
 
 
         return produtoRetorno;
+    }
+
+    @Override
+    public ProdutosBlingResponse getProdutoByCodigo(String codigo) {
+
+        try {
+            String apiKey = baseUriProperties.getApiKey();
+
+            Map<String, String> queryParamsMap = new HashMap<>();
+            queryParamsMap.put("apikey", apiKey);
+            queryParamsMap.put("estoque", "S");
+            queryParamsMap.put("imagem", "S");
+            queryParamsMap.put("loja", baseUriProperties.getMercadoLivreBligId());
+
+            RequestModel requestModel = RequestModel.builder()
+                    .url(String.format(baseUriProperties.getUrlBlingProdutoByCodigo(), codigo))
+                    .queryParamsMap(queryParamsMap)
+                    .returnClass(ProdutosBlingResponse.class)
+                    .build();
+
+            return requestComponent.get(requestModel);
+
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            throw new BadRequestException("Erro ao buscar produtos bling ==> ", e);
+        }
     }
 
 

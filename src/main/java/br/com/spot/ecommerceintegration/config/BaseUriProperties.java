@@ -25,4 +25,5 @@ public class BaseUriProperties {
 
     String urlBlingProdutosDefault;
 
+    String urlBlingProdutoByCodigo;
 }

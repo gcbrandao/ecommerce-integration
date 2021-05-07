@@ -11,5 +11,7 @@ public interface ProdutoBlingService {
 
     List<ProdutoElement> getTodosProdutosBling();
 
-    ProdutosBlingResponse getTodosProdutosBlingMono();
+    List<ProdutosBlingResponse> getTodosProdutosBlingMono();
+
+    ProdutosBlingResponse getProdutoByCodigo(String codigo);
 }

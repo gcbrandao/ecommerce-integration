@@ -25,10 +25,10 @@ public class TesteController {
 
     @GetMapping(value = "teste")
     public ProdutosBlingResponse getProdutosBling(){
-        log.info("entrei no controller ");
+        log.info("entrei no controller teste");
 
 
-        ProdutosBlingResponse produtosBling = produtoBlingService.getProdutosBling("17");
+        ProdutosBlingResponse produtosBling = produtoBlingService.getProdutosBling("1");
 
         return produtosBling;
     }
@@ -43,11 +43,20 @@ public class TesteController {
     }
 
     @GetMapping(value = "listAllMono")
-    public ResponseEntity<ProdutosBlingResponse> getTodosProdutosBlingMono(){
+    public ResponseEntity<List<ProdutosBlingResponse>> getTodosProdutosBlingMono(){
         log.info("entrei no controller ");
 
-        ProdutosBlingResponse todosProdutosBling = produtoBlingService.getTodosProdutosBlingMono();
+        List<ProdutosBlingResponse> todosProdutosBling = produtoBlingService.getTodosProdutosBlingMono();
 
         return ResponseEntity.ok(todosProdutosBling);
+    }
+
+    @GetMapping(value = "getProduto")
+    public ResponseEntity<ProdutosBlingResponse> getProduto(){
+        log.info("entrei no controller - ProdutoByCod");
+
+        ProdutosBlingResponse produto = produtoBlingService.getProdutoByCodigo("4952");
+
+        return ResponseEntity.ok(produto);
     }
 }

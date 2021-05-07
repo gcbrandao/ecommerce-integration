@@ -160,6 +160,9 @@ public class Produto {
     @JsonProperty("estoqueAtual")
     private long estoqueAtual;
 
+    @JsonProperty("imagem")
+    public List<Imagem> imagems;
+
     @JsonProperty("depositos")
     private List<DepositoElement> depositos;
 
